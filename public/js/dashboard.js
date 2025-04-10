@@ -14,6 +14,9 @@ document.addEventListener("DOMContentLoaded", () => {
     return
   }
 
+  // Set current year in footer
+  document.getElementById("current-year").textContent = new Date().getFullYear()
+
   // Get user data
   const userString = localStorage.getItem("user")
   let user = null
@@ -38,7 +41,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Set user info in UI
   const userNameElements = document.querySelectorAll("#user-name")
-  const userInitialElements = document.querySelectorAll("#user-initial")
+  const userEmailElements = document.querySelectorAll("#user-email")
+  const userInitialElements = document.querySelectorAll("#user-initial, #user-initial-large")
   const welcomeNameElement = document.getElementById("welcome-name")
   const userBalanceElement = document.getElementById("user-balance")
 
@@ -46,31 +50,35 @@ document.addEventListener("DOMContentLoaded", () => {
     if (el) el.textContent = user.name
   })
 
+  userEmailElements.forEach((el) => {
+    if (el) el.textContent = user.email
+  })
+
   userInitialElements.forEach((el) => {
     if (el) el.textContent = user.name.charAt(0)
   })
 
   if (welcomeNameElement) {
-    welcomeNameElement.textContent = user.name
+    welcomeNameElement.textContent = user.name.split(" ")[0]
   }
 
   if (userBalanceElement) {
     userBalanceElement.textContent = formatCurrency(user.balance, user.currency)
   }
 
-  // Handle user dropdown
-  const userDropdownBtn = document.querySelector(".user-dropdown-btn")
-  const dropdownMenu = document.querySelector(".dropdown-menu")
+  // Handle user menu dropdown
+  const userMenuBtn = document.querySelector(".user-menu-btn")
+  const userDropdown = document.querySelector(".user-dropdown")
 
-  if (userDropdownBtn && dropdownMenu) {
-    userDropdownBtn.addEventListener("click", () => {
-      dropdownMenu.classList.toggle("show")
+  if (userMenuBtn && userDropdown) {
+    userMenuBtn.addEventListener("click", () => {
+      userDropdown.classList.toggle("show")
     })
 
     // Close dropdown when clicking outside
     document.addEventListener("click", (e) => {
-      if (!userDropdownBtn.contains(e.target) && !dropdownMenu.contains(e.target)) {
-        dropdownMenu.classList.remove("show")
+      if (!userMenuBtn.contains(e.target) && !userDropdown.contains(e.target)) {
+        userDropdown.classList.remove("show")
       }
     })
   }
@@ -90,22 +98,34 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   }
 
-  // Handle tabs
-  const tabBtns = document.querySelectorAll(".tab-btn")
+  // Handle activity filter tabs
+  const filterTabs = document.querySelectorAll(".filter-tab")
 
-  tabBtns.forEach((btn) => {
-    btn.addEventListener("click", function () {
-      const tabId = this.getAttribute("data-tab")
+  filterTabs.forEach((tab) => {
+    tab.addEventListener("click", function () {
+      // Remove active class from all tabs
+      filterTabs.forEach((t) => t.classList.remove("active"))
 
-      // Remove active class from all tabs and panes
-      document.querySelectorAll(".tab-btn").forEach((el) => el.classList.remove("active"))
-      document.querySelectorAll(".tab-pane").forEach((el) => el.classList.remove("active"))
-
-      // Add active class to clicked tab and corresponding pane
+      // Add active class to clicked tab
       this.classList.add("active")
-      document.getElementById(`${tabId}-tab`).classList.add("active")
+
+      // Get filter value
+      const filter = this.getAttribute("data-filter")
+
+      // Apply filter to transactions
+      filterTransactions(filter)
     })
   })
+
+  // Handle search input
+  const searchInput = document.querySelector(".filter-search input")
+
+  if (searchInput) {
+    searchInput.addEventListener("input", function () {
+      const searchTerm = this.value.toLowerCase()
+      searchTransactions(searchTerm)
+    })
+  }
 
   // Load transactions
   const transactionsList = document.getElementById("transactions-list")
@@ -121,7 +141,8 @@ document.addEventListener("DOMContentLoaded", () => {
           // Show empty state
           transactionsList.innerHTML = `
             <div class="empty-state">
-              <p>No transactions found</p>
+              <p>You don't have any transactions yet</p>
+              <p>Send or request money to get started</p>
             </div>
           `
         }
@@ -131,10 +152,45 @@ document.addEventListener("DOMContentLoaded", () => {
         // Show error state
         transactionsList.innerHTML = `
           <div class="empty-state">
-            <p>Error loading transactions. Please try again.</p>
+            <p>Something went wrong</p>
+            <p>We couldn't load your transactions. Please try again.</p>
           </div>
         `
       })
+  }
+
+  // Function to filter transactions
+  function filterTransactions(filter) {
+    const transactions = document.querySelectorAll(".transaction-item")
+
+    if (transactions.length === 0) return
+
+    transactions.forEach((transaction) => {
+      if (filter === "all") {
+        transaction.style.display = ""
+      } else {
+        const type = transaction.getAttribute("data-type")
+        transaction.style.display = type === filter ? "" : "none"
+      }
+    })
+  }
+
+  // Function to search transactions
+  function searchTransactions(searchTerm) {
+    const transactions = document.querySelectorAll(".transaction-item")
+
+    if (transactions.length === 0) return
+
+    transactions.forEach((transaction) => {
+      const name = transaction.querySelector(".transaction-name").textContent.toLowerCase()
+      const amount = transaction.querySelector(".transaction-amount").textContent.toLowerCase()
+
+      if (name.includes(searchTerm) || amount.includes(searchTerm)) {
+        transaction.style.display = ""
+      } else {
+        transaction.style.display = "none"
+      }
+    })
   }
 })
 
@@ -151,13 +207,15 @@ function renderTransactions(transactions, container) {
   if (transactions.length === 0) {
     container.innerHTML = `
       <div class="empty-state">
-        <p>No transactions found</p>
+        <p>You don't have any transactions yet</p>
+        <p>Send or request money to get started</p>
       </div>
     `
     return
   }
 
-  let html = ""
+  // Clear loading spinner
+  container.innerHTML = ""
 
   transactions.forEach((transaction) => {
     const formattedDate = new Date(transaction.createdAt).toLocaleDateString()
@@ -178,26 +236,26 @@ function renderTransactions(transactions, container) {
       amount = transaction.amount
     }
 
-    html += `
-      <div class="transaction-item">
-        <div class="transaction-left">
-          <div class="transaction-icon ${type}">
-            <i class="fas fa-arrow-${type === "received" ? "down" : "up"}"></i>
-          </div>
+    const transactionItem = document.createElement("div")
+    transactionItem.className = "transaction-item"
+    transactionItem.setAttribute("data-type", type)
+
+    transactionItem.innerHTML = `
+      <div class="transaction-icon ${type}">
+        <i class="fas fa-arrow-${type === "received" ? "down" : "up"}"></i>
+      </div>
+      <div class="transaction-details">
+        <div class="transaction-name">${name}</div>
+        <div class="transaction-date">${formattedDate}</div>
+      </div>
+      <div>
+        <div class="transaction-amount ${type === "received" ? "received" : ""}">
+          ${type === "received" ? "+" : "-"}${formatCurrency(amount)}
         </div>
-        <div class="transaction-details">
-          <h3>${type === "received" ? `From ${name}` : `To ${name}`}</h3>
-          <p>${formattedDate}</p>
-        </div>
-        <div class="transaction-amount">
-          <div class="amount ${type === "received" ? "received" : ""}">
-            ${type === "received" ? "+" : "-"}${formatCurrency(amount)}
-          </div>
-          <div class="status">${transaction.status}</div>
-        </div>
+        <div class="transaction-status">${transaction.status}</div>
       </div>
     `
-  })
 
-  container.innerHTML = html
+    container.appendChild(transactionItem)
+  })
 }
