@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - PayPal</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="container">
+                <div class="header-brand">
+                    <a href="dashboard.html">
+                        <h1>PayPal</h1>
+                    </a>
+                </div>
+                <div class="header-actions">
+                    <button class="notification-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge"></span>
+                    </button>
+                    <div class="user-dropdown">
+                        <button class="user-dropdown-btn">
+                            <div class="user-avatar">
+                                <span id="user-initial"></span>
+                            </div>
+                            <span id="user-name" class="user-name"></span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-user"></i> Profile
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-cog"></i> Settings
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" id="logout-btn">
+                                <i class="fas fa-sign-out-alt"></i> Log out
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            <!-- Sidebar -->
+            <aside class="dashboard-sidebar">
+                <nav class="sidebar-nav">
+                    <ul>
+                        <li class="active">
+                            <a href="dashboard.html">
+                                <i class="fas fa-home"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="activity.html">
+                                <i class="fas fa-chart-bar"></i>
+                                <span>Activity</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="send-money.html">
+                                <i class="fas fa-paper-plane"></i>
+                                <span>Send Money</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="request-money.html">
+                                <i class="fas fa-hand-holding-usd"></i>
+                                <span>Request Money</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="wallet.html">
+                                <i class="fas fa-wallet"></i>
+                                <span>Wallet</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="contacts.html">
+                                <i class="fas fa-address-book"></i>
+                                <span>Contacts</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="settings.html">
+                                <i class="fas fa-cog"></i>
+                                <span>Settings</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="help.html">
+                                <i class="fas fa-question-circle"></i>
+                                <span>Help & Support</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="dashboard-main">
+                <div class="dashboard-header-content">
+                    <div>
+                        <h1>Dashboard</h1>
+                        <p>Welcome back, <span id="welcome-name"></span></p>
+                    </div>
+                    <div class="dashboard-actions">
+                        <a href="send-money.html" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> Send Money
+                        </a>
+                        <a href="request-money.html" class="btn btn-outline">Request Money</a>
+                    </div>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stats-card">
+                        <div class="stats-card-header">
+                            <h3>Balance</h3>
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="stats-card-body">
+                            <div class="stats-value" id="user-balance">$0.00</div>
+                            <p class="stats-label">Available</p>
+                        </div>
+                    </div>
+                    <div class="stats-card">
+                        <div class="stats-card-header">
+                            <h3>Sent</h3>
+                            <i class="fas fa-arrow-up"></i>
+                        </div>
+                        <div class="stats-card-body">
+                            <div class="stats-value">$1,250.00</div>
+                            <p class="stats-label">Last 30 days</p>
+                        </div>
+                    </div>
+                    <div class="stats-card">
+                        <div class="stats-card-header">
+                            <h3>Received</h3>
+                            <i class="fas fa-arrow-down"></i>
+                        </div>
+                        <div class="stats-card-body">
+                            <div class="stats-value">$2,750.00</div>
+                            <p class="stats-label">Last 30 days</p>
+                        </div>
+                    </div>
+                    <div class="stats-card">
+                        <div class="stats-card-header">
+                            <h3>Pending</h3>
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stats-card-body">
+                            <div class="stats-value">$125.50</div>
+                            <p class="stats-label">In progress</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <div class="tabs">
+                    <div class="tabs-header">
+                        <button class="tab-btn active" data-tab="activity">Activity</button>
+                        <button class="tab-btn" data-tab="pending">Pending</button>
+                        <button class="tab-btn" data-tab="statements">Statements</button>
+                    </div>
+                    <div class="tabs-content">
+                        <div class="tab-pane active" id="activity-tab">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h2>Recent Transactions</h2>
+                                    <div class="search-container">
+                                        <i class="fas fa-search"></i>
+                                        <input type="text" placeholder="Search transactions..." class="search-input">
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="transactions-list" id="transactions-list">
+                                        <!-- Transactions will be loaded here -->
+                                    </div>
+                                    <div class="view-all">
+                                        <a href="activity.html">View all transactions</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="pending-tab">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h2>Pending Transactions</h2>
+                                    <p>Transactions that are still in progress</p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="empty-state">
+                                        <p>No pending transactions</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="statements-tab">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h2>Account Statements</h2>
+                                    <p>Download your monthly account statements</p>
+                                </div>
+                                <div class="card-body">
+                                    <div class="statements-list">
+                                        <div class="statement-item">
+                                            <div class="statement-icon">
+                                                <i class="fas fa-file-pdf"></i>
+                                            </div>
+                                            <div class="statement-details">
+                                                <h3>March 2023 Statement</h3>
+                                                <p>PDF Document</p>
+                                            </div>
+                                            <button class="btn btn-outline btn-sm">Download</button>
+                                        </div>
+                                        <div class="statement-item">
+                                            <div class="statement-icon">
+                                                <i class="fas fa-file-pdf"></i>
+                                            </div>
+                                            <div class="statement-details">
+                                                <h3>February 2023 Statement</h3>
+                                                <p>PDF Document</p>
+                                            </div>
+                                            <button class="btn btn-outline btn-sm">Download</button>
+                                        </div>
+                                        <div class="statement-item">
+                                            <div class="statement-icon">
+                                                <i class="fas fa-file-pdf"></i>
+                                            </div>
+                                            <div class="statement-details">
+                                                <h3>January 2023 Statement</h3>
+                                                <p>PDF Document</p>
+                                            </div>
+                                            <button class="btn btn-outline btn-sm">Download</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html>

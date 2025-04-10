@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Money - PayPal</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="container">
+                <div class="header-brand">
+                    <a href="dashboard.html">
+                        <h1>PayPal</h1>
+                    </a>
+                </div>
+                <div class="header-actions">
+                    <button class="notification-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge"></span>
+                    </button>
+                    <div class="user-dropdown">
+                        <button class="user-dropdown-btn">
+                            <div class="user-avatar">
+                                <span id="user-initial"></span>
+                            </div>
+                            <span id="user-name" class="user-name"></span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-user"></i> Profile
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-cog"></i> Settings
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" id="logout-btn">
+                                <i class="fas fa-sign-out-alt"></i> Log out
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            <!-- Sidebar -->
+            <aside class="dashboard-sidebar">
+                <nav class="sidebar-nav">
+                    <ul>
+                        <li>
+                            <a href="dashboard.html">
+                                <i class="fas fa-home"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="activity.html">
+                                <i class="fas fa-chart-bar"></i>
+                                <span>Activity</span>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="send-money.html">
+                                <i class="fas fa-paper-plane"></i>
+                                <span>Send Money</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="request-money.html">
+                                <i class="fas fa-hand-holding-usd"></i>
+                                <span>Request Money</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="wallet.html">
+                                <i class="fas fa-wallet"></i>
+                                <span>Wallet</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="contacts.html">
+                                <i class="fas fa-address-book"></i>
+                                <span>Contacts</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="settings.html">
+                                <i class="fas fa-cog"></i>
+                                <span>Settings</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="help.html">
+                                <i class="fas fa-question-circle"></i>
+                                <span>Help & Support</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="dashboard-main">
+                <div class="back-link">
+                    <a href="dashboard.html">
+                        <i class="fas fa-arrow-left"></i> Back to Dashboard
+                    </a>
+                </div>
+
+                <div class="centered-content">
+                    <div class="card send-money-card">
+                        <div class="card-header">
+                            <h2>Send Money</h2>
+                            <p>Send money to friends, family, or businesses</p>
+                        </div>
+                        <div class="card-body">
+                            <div id="error-message" class="error-message"></div>
+                            
+                            <div class="balance-info">
+                                <div class="balance-label">Available Balance</div>
+                                <div class="balance-value" id="available-balance">$0.00</div>
+                            </div>
+
+                            <div class="tabs">
+                                <div class="tabs-header">
+                                    <button class="tab-btn active" data-tab="email">
+                                        <i class="fas fa-envelope"></i> Email
+                                    </button>
+                                    <button class="tab-btn" data-tab="contacts">
+                                        <i class="fas fa-users"></i> Contacts
+                                    </button>
+                                </div>
+                                <div class="tabs-content">
+                                    <div class="tab-pane active" id="email-tab">
+                                        <form id="send-money-form">
+                                            <div class="form-group">
+                                                <label for="recipient-email">Recipient Email</label>
+                                                <input type="email" id="recipient-email" name="recipient" placeholder="name@example.com" required>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label for="amount">Amount</label>
+                                                <div class="input-with-icon">
+                                                    <i class="fas fa-dollar-sign"></i>
+                                                    <input type="number" id="amount" name="amount" step="0.01" min="0.01" placeholder="0.00" required>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                                <label for="note">Note (Optional)</label>
+                                                <input type="text" id="note" name="note" placeholder="What's this for?">
+                                            </div>
+                                            
+                                            <button type="submit" class="btn btn-primary btn-block">Send Money</button>
+                                        </form>
+                                    </div>
+                                    <div class="tab-pane" id="contacts-tab">
+                                        <div class="contacts-list">
+                                            <p class="contacts-label">Select from your contacts:</p>
+                                            
+                                            <div class="contact-item" data-email="jane@example.com">
+                                                <div class="contact-avatar">J</div>
+                                                <div class="contact-info">Jane Smith (jane@example.com)</div>
+                                                <button class="btn btn-outline btn-sm">Select</button>
+                                            </div>
+                                            <div class="contact-item" data-email="bob@example.com">
+                                                <div class="contact-avatar">B</div>
+                                                <div class="contact-info">Bob Johnson (bob@example.com)</div>
+                                                <button class="btn btn-outline btn-sm">Select</button>
+                                            </div>
+                                            <div class="contact-item" data-email="sarah@example.com">
+                                                <div class="contact-avatar">S</div>
+                                                <div class="contact-info">Sarah Williams (sarah@example.com)</div>
+                                                <button class="btn btn-outline btn-sm">Select</button>
+                                            </div>
+                                            
+                                            <div class="view-all-contacts">
+                                                <button class="btn btn-outline">
+                                                    <i class="fas fa-users"></i> View All Contacts
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="action-buttons">
+                                <a href="dashboard.html" class="btn btn-outline">Cancel</a>
+                                <button id="continue-btn" class="btn btn-primary">Continue</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="js/send-money.js"></script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Confirmation - PayPal</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="container">
+                <div class="header-brand">
+                    <a href="dashboard.html">
+                        <h1>PayPal</h1>
+                    </a>
+                </div>
+                <div class="header-actions">
+                    <button class="notification-btn">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge"></span>
+                    </button>
+                    <div class="user-dropdown">
+                        <button class="user-dropdown-btn">
+                            <div class="user-avatar">
+                                <span id="user-initial"></span>
+                            </div>
+                            <span id="user-name" class="user-name"></span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-user"></i> Profile
+                            </a>
+                            <a href="#" class="dropdown-item">
+                                <i class="fas fa-cog"></i> Settings
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item" id="logout-btn">
+                                <i class="fas fa-sign-out-alt"></i> Log out
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            <!-- Sidebar -->
+            <aside class="dashboard-sidebar">
+                <nav class="sidebar-nav">
+                    <ul>
+                        <li>
+                            <a href="dashboard.html">
+                                <i class="fas fa-home"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="activity.html">
+                                <i class="fas fa-chart-bar"></i>
+                                <span>Activity</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="send-money.html">
+                                <i class="fas fa-paper-plane"></i>
+                                <span>Send Money</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="request-money.html">
+                                <i class="fas fa-hand-holding-usd"></i>
+                                <span>Request Money</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="wallet.html">
+                                <i class="fas fa-wallet"></i>
+                                <span>Wallet</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="contacts.html">
+                                <i class="fas fa-address-book"></i>
+                                <span>Contacts</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="settings.html">
+                                <i class="fas fa-cog"></i>
+                                <span>Settings</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="help.html">
+                                <i class="fas fa-question-circle"></i>
+                                <span>Help & Support</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="dashboard-main">
+                <div class="centered-content">
+                    <div class="card receipt-card">
+                        <div class="receipt-header">
+                            <div class="success-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <h2 id="receipt-title">Transaction Successful</h2>
+                            <p id="receipt-subtitle">Your transaction has been processed</p>
+                        </div>
+                        <div class="receipt-body">
+                            <div class="receipt-details">
+                                <div class="receipt-row">
+                                    <div class="receipt-label">Transaction ID</div>
+                                    <div class="receipt-value" id="transaction-id">TX-12345</div>
+                                </div>
+                                <div class="receipt-row">
+                                    <div class="receipt-label">Date & Time</div>
+                                    <div class="receipt-value" id="transaction-date">April 15, 2023 14:30:45</div>
+                                </div>
+                                <div class="receipt-row">
+                                    <div class="receipt-label" id="recipient-label">Recipient</div>
+                                    <div class="receipt-value" id="recipient-value">jane@example.com</div>
+                                </div>
+                                <div class="receipt-row">
+                                    <div class="receipt-label">Amount</div>
+                                    <div class="receipt-value" id="transaction-amount">$100.00</div>
+                                </div>
+                                <div class="receipt-row">
+                                    <div class="receipt-label">Status</div>
+                                    <div class="receipt-value status-completed">Completed</div>
+                                </div>
+                                <div class="receipt-row" id="note-row">
+                                    <div class="receipt-label">Note</div>
+                                    <div class="receipt-value" id="transaction-note">Thank you for the coffee!</div>
+                                </div>
+                            </div>
+                            <div class="receipt-message" id="receipt-message">
+                                The recipient will be notified about this transaction.
+                            </div>
+                            <div class="receipt-countdown">
+                                Redirecting to dashboard in <span id="countdown">5</span> seconds...
+                            </div>
+                        </div>
+                        <div class="receipt-footer">
+                            <a href="dashboard.html" class="btn btn-primary">
+                                <i class="fas fa-home"></i> Go to Dashboard
+                            </a>
+                            <button id="print-receipt" class="btn btn-outline">
+                                <i class="fas fa-print"></i> Print Receipt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="js/confirmation.js"></script>
+</body>
+</html>
