@@ -1,0 +1,730 @@
+/* PayPal Dashboard Styles */
+
+/* Base Styles */
+.paypal-theme {
+  --paypal-blue: #0070ba;
+  --paypal-dark-blue: #003087;
+  --paypal-light-blue: #009cde;
+  --paypal-hover-blue: #005ea6;
+  --paypal-background: #f5f7fa;
+  --paypal-text: #2c2e2f;
+  --paypal-text-light: #687173;
+  --paypal-border: #cbd2d6;
+  --paypal-success: #26a65b;
+  --paypal-warning: #f39c12;
+  --paypal-danger: #e74c3c;
+  --paypal-white: #ffffff;
+  --paypal-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --paypal-radius: 4px;
+  --paypal-transition: all 0.2s ease;
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--paypal-text);
+  background-color: var(--paypal-background);
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+.paypal-dashboard {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header Styles */
+.paypal-header {
+  background-color: var(--paypal-white);
+  border-bottom: 1px solid var(--paypal-border);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: var(--paypal-shadow);
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  margin-right: 24px;
+}
+
+.logo img {
+  height: 30px;
+}
+
+.main-nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.main-nav li {
+  margin: 0 12px;
+  position: relative;
+}
+
+.main-nav li.active::after {
+  content: "";
+  position: absolute;
+  bottom: -16px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: var(--paypal-blue);
+}
+
+.main-nav a {
+  color: var(--paypal-text);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 8px 0;
+  transition: var(--paypal-transition);
+}
+
+.main-nav a:hover {
+  color: var(--paypal-blue);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+}
+
+.notifications-btn,
+.settings-btn {
+  background: none;
+  border: none;
+  color: var(--paypal-text);
+  font-size: 16px;
+  padding: 8px;
+  margin-right: 16px;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--paypal-transition);
+}
+
+.notifications-btn:hover,
+.settings-btn:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.user-menu {
+  position: relative;
+}
+
+.user-menu-btn {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.user-initial {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--paypal-blue);
+  color: var(--paypal-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+.user-initial.large {
+  width: 48px;
+  height: 48px;
+  font-size: 18px;
+}
+
+.user-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: var(--paypal-white);
+  border-radius: var(--paypal-radius);
+  box-shadow: var(--paypal-shadow);
+  width: 280px;
+  z-index: 1000;
+  display: none;
+  margin-top: 8px;
+  overflow: hidden;
+}
+
+.user-dropdown.show {
+  display: block;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid var(--paypal-border);
+}
+
+.user-details {
+  margin-left: 12px;
+}
+
+.user-name {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.user-email {
+  font-size: 13px;
+  color: var(--paypal-text-light);
+}
+
+.dropdown-menu {
+  list-style: none;
+  margin: 0;
+  padding: 8px 0;
+}
+
+.dropdown-menu li {
+  margin: 0;
+}
+
+.dropdown-menu a {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  color: var(--paypal-text);
+  text-decoration: none;
+  transition: var(--paypal-transition);
+}
+
+.dropdown-menu a:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.dropdown-menu i {
+  margin-right: 12px;
+  width: 16px;
+  color: var(--paypal-text-light);
+}
+
+.dropdown-menu .divider {
+  height: 1px;
+  background-color: var(--paypal-border);
+  margin: 8px 0;
+}
+
+/* Main Content Styles */
+.paypal-main {
+  flex: 1;
+  padding: 24px 0;
+}
+
+.main-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Welcome Section */
+.welcome-section {
+  margin-bottom: 24px;
+}
+
+.welcome-message h1 {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Account Overview */
+.account-overview {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
+.balance-card {
+  background-color: var(--paypal-white);
+  border-radius: var(--paypal-radius);
+  box-shadow: var(--paypal-shadow);
+  padding: 24px;
+}
+
+.balance-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.balance-header h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.link-btn {
+  color: var(--paypal-blue);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.link-btn:hover {
+  text-decoration: underline;
+}
+
+.balance-amount {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: var(--paypal-dark-blue);
+}
+
+.balance-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.actions-card {
+  background-color: var(--paypal-white);
+  border-radius: var(--paypal-radius);
+  box-shadow: var(--paypal-shadow);
+  padding: 24px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.action-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 16px;
+  border-radius: var(--paypal-radius);
+  cursor: pointer;
+  transition: var(--paypal-transition);
+}
+
+.action-item:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.action-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: rgba(0, 112, 186, 0.1);
+  color: var(--paypal-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+
+.action-text {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Activity Section */
+.activity-section {
+  margin-bottom: 32px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.section-header h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.activity-filter {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.filter-tabs {
+  display: flex;
+  border-bottom: 1px solid var(--paypal-border);
+}
+
+.filter-tab {
+  padding: 12px 16px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--paypal-text);
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--paypal-transition);
+}
+
+.filter-tab:hover {
+  color: var(--paypal-blue);
+}
+
+.filter-tab.active {
+  color: var(--paypal-blue);
+  border-bottom-color: var(--paypal-blue);
+}
+
+.filter-search {
+  position: relative;
+}
+
+.filter-search input {
+  width: 100%;
+  padding: 10px 16px 10px 40px;
+  border: 1px solid var(--paypal-border);
+  border-radius: var(--paypal-radius);
+  font-size: 14px;
+}
+
+.filter-search i {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--paypal-text-light);
+}
+
+.transactions-list {
+  background-color: var(--paypal-white);
+  border-radius: var(--paypal-radius);
+  box-shadow: var(--paypal-shadow);
+  min-height: 300px;
+  position: relative;
+}
+
+.transaction-item {
+  display: flex;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--paypal-border);
+}
+
+.transaction-item:last-child {
+  border-bottom: none;
+}
+
+.transaction-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 16px;
+  flex-shrink: 0;
+}
+
+.transaction-icon.received {
+  background-color: rgba(38, 166, 91, 0.1);
+  color: var(--paypal-success);
+}
+
+.transaction-icon.sent {
+  background-color: rgba(0, 112, 186, 0.1);
+  color: var(--paypal-blue);
+}
+
+.transaction-details {
+  flex: 1;
+}
+
+.transaction-name {
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.transaction-date {
+  font-size: 13px;
+  color: var(--paypal-text-light);
+}
+
+.transaction-amount {
+  font-weight: 600;
+  text-align: right;
+}
+
+.transaction-amount.received {
+  color: var(--paypal-success);
+}
+
+.transaction-status {
+  font-size: 13px;
+  color: var(--paypal-text-light);
+  text-align: right;
+  text-transform: capitalize;
+}
+
+.loading-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(0, 112, 186, 0.1);
+  border-radius: 50%;
+  border-top-color: var(--paypal-blue);
+  animation: spin 1s linear infinite;
+  margin: 0 auto 16px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--paypal-text-light);
+}
+
+/* Offers Section */
+.offers-section {
+  margin-bottom: 32px;
+}
+
+.offers-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.offer-card {
+  background-color: var(--paypal-white);
+  border-radius: var(--paypal-radius);
+  box-shadow: var(--paypal-shadow);
+  overflow: hidden;
+}
+
+.offer-card img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+
+.offer-content {
+  padding: 16px;
+}
+
+.offer-content h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.offer-content p {
+  font-size: 14px;
+  color: var(--paypal-text-light);
+  margin: 0 0 16px;
+}
+
+/* Footer Styles */
+.paypal-footer {
+  background-color: var(--paypal-white);
+  border-top: 1px solid var(--paypal-border);
+  padding: 24px 0;
+  margin-top: auto;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-links ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 0;
+}
+
+.footer-links li {
+  margin-right: 24px;
+  margin-bottom: 8px;
+}
+
+.footer-links a {
+  color: var(--paypal-text-light);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
+}
+
+.footer-legal {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-top: 1px solid var(--paypal-border);
+  padding-top: 16px;
+}
+
+.footer-legal p {
+  font-size: 12px;
+  color: var(--paypal-text-light);
+  margin: 0 0 8px;
+}
+
+.footer-legal ul {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-legal li {
+  margin-right: 16px;
+}
+
+.footer-legal a {
+  color: var(--paypal-text-light);
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.footer-legal a:hover {
+  text-decoration: underline;
+}
+
+/* Button Styles */
+.btn {
+  display: inline-block;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 10px 16px;
+  font-size: 14px;
+  line-height: 1.5;
+  border-radius: var(--paypal-radius);
+  transition: var(--paypal-transition);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-primary {
+  color: var(--paypal-white);
+  background-color: var(--paypal-blue);
+  border-color: var(--paypal-blue);
+}
+
+.btn-primary:hover {
+  background-color: var(--paypal-hover-blue);
+  border-color: var(--paypal-hover-blue);
+}
+
+.btn-outline {
+  color: var(--paypal-blue);
+  background-color: transparent;
+  border-color: var(--paypal-blue);
+}
+
+.btn-outline:hover {
+  color: var(--paypal-white);
+  background-color: var(--paypal-blue);
+  border-color: var(--paypal-blue);
+}
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: 12px;
+}
+
+/* Media Queries */
+@media (min-width: 768px) {
+  .account-overview {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .activity-filter {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .filter-tabs {
+    border-bottom: none;
+  }
+
+  .filter-search {
+    width: 300px;
+  }
+
+  .offers-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-legal {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-legal p {
+    margin: 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .main-nav {
+    display: none;
+  }
+
+  .header-container {
+    height: 56px;
+  }
+}
